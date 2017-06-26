@@ -1,0 +1,53 @@
+{
+  "template": "*-ingestion-*",
+  "settings": {
+    "index.refresh_interval": "5s",
+    "index.number_of_replicas": "0"
+  },
+  "mappings": {
+    "_default_": {
+      "_all": {
+        "enabled": true,
+        "norms": {
+          "enabled": false
+        }
+      },
+      "dynamic_templates": [
+        {
+          "template1": {
+            "mapping": {
+              "doc_values": true,
+              "ignore_above": 1024,
+              "index": "not_analyzed",
+              "type": "{dynamic_type}"
+            },
+            "match": "*"
+          }
+        }
+      ],
+      "properties": {
+          "@timestamp": {
+            "format": "dateOptionalTime",
+            "type": "date"
+          },"host": {
+            "index": "not_analyzed",
+            "type": "string"
+          },"processInstance": {
+            "index": "not_analyzed",
+            "type": "string"
+          },"processItem": {
+            "index": "not_analyzed",
+            "type": "string"
+          },"action": {
+            "index": "not_analyzed",
+            "type": "string"
+          },"build_number": {
+            "type": "integer"
+          },"timeSpent": {
+            "type": "integer"
+          }
+      }
+    }
+  }
+}
+

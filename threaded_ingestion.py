@@ -8,7 +8,7 @@ from pymongo import MongoClient, ReturnDocument
 from optparse import OptionParser
 from multiprocessing import freeze_support
 
-INDEX_PREFIX = 'ingestion'
+INDEX_PREFIX = 'test-ingestion'
 CONTENT_COLLECTION = 'content'
 INDEX_NAME = "-".join([INDEX_PREFIX, datetime.datetime.utcnow().strftime('%Y-%m-%d')])
 COUNT_CREATORS = 5

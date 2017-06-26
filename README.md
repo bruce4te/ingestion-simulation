@@ -10,6 +10,19 @@ The simulation is based on Python 2.7.11.
 1. If not already available install [pip](https://packaging.python.org/tutorials/installing-packages/#install-pip-setuptools-and-wheel)
 2. Install virtualenv: `pip install virtualenv`
 3. Clone this repository
-4. cd to the cloned repository where requirements.txt is located.
-5. activate your virtualenv.
+4. activate your virtualenv.
+5. cd to the cloned repository directory where `requirements.txt` is located.
 6. run: `pip install -r requirements.txt` in your shell.
+7. add a `mongodb_uri.txt` file to the directory with a single line:
+
+    `mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database][?options]]`
+
+   where you replace the placeholders with corresponding real values.
+8. run the command:
+
+    `curl -XPUT 'http://<es-host>:<es-port>/_template/template_ingestion' -d@template_ingestion.json`
+    
+   where `<es-host>` is your elastic server IP or hostname (e.g. localhost) and `<es-port>` the corresponding port (e.g. 9200)
+     
+## Run the ingestion
+
