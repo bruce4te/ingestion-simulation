@@ -7,18 +7,20 @@ by this cluster, parallel processing of those assets on a different, remote app 
   
 ## Installation
 The simulation is based on Python 2.7.11. 
-1. If not already available install [pip](https://packaging.python.org/tutorials/installing-packages/#install-pip-setuptools-and-wheel)
-2. Install virtualenv: `pip install virtualenv`
-3. Clone this repository
-4. activate your virtualenv.
-5. cd to the cloned repository directory where `requirements.txt` is located.
-6. run: `pip install -r requirements.txt` in your shell.
-7. add a `mongodb_uri.txt` file to the directory with a single line:
+* If not already available install [pip](https://packaging.python.org/tutorials/installing-packages/#install-pip-setuptools-and-wheel)
+* Install virtualenv: `pip install virtualenv`
+* Clone this repository
+* cd to the cloned repository directory where `requirements.txt` is located
+* Create a virtualenv named `venv` via `virtualenv venv`
+* cd to the `venv` directory
+* activate your virtualenv (e.g. `$ source bin/activate`)
+* run: `pip install -r requirements.txt` in your shell
+* add a `mongodb_uri.txt` file to the directory with a single line:
 
     `mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database][?options]]`
 
    where you replace the placeholders with corresponding real values.
-8. run the command:
+* run the command:
 
     `curl -XPUT 'http://<es-host>:<es-port>/_template/template_ingestion' -d@template_ingestion.json`
     
