@@ -8,6 +8,8 @@ from pymongo import MongoClient, ReturnDocument
 from optparse import OptionParser
 from multiprocessing import freeze_support
 
+from pymongo.errors import DuplicateKeyError
+
 INDEX_PREFIX = 'test-ingestion'
 CONTENT_COLLECTION = 'content'
 INDEX_NAME = "-".join([INDEX_PREFIX, datetime.datetime.utcnow().strftime('%Y-%m-%d')])
@@ -100,9 +102,10 @@ def receive_assets(host_name):
 def create_asset(content_collection, host_name, file_name, size):
     global creation_queue
     start = datetime.datetime.utcnow()
-    create_repo_entry(file_name, content_collection, size)
-    log_action("File received and stored", host_name, file_name, start)
-    creation_queue.put(file_name)
+    result = create_repo_entry(file_name, content_collection, size)
+    if result is not None:
+        log_action("File received and stored", host_name, file_name, start)
+        creation_queue.put(file_name)
 
 
 def process_assets(host_name):
@@ -158,8 +161,13 @@ def create_repo_entry(_id, content_collection, size):
     file_type = file_parts[-1]
     if len(file_parts) > 2:
         file_type = "subasset/pdf"
-    content_collection.insert_one({"_id": _id, "type": file_type, "size": size, "created": datetime.datetime.utcnow(),
-                                   "modified": datetime.datetime.utcnow()})
+    try:
+        result = content_collection.insert_one({"_id": _id, "type": file_type, "size": size, "created": datetime.datetime.utcnow(),
+                                                "modified": datetime.datetime.utcnow()})
+        return result.inserted_id
+    except DuplicateKeyError:
+        print "duplicate key error inserting doc with _id " + _id
+        return None
 
 
 def update_repo_entry(_id, content_collection):

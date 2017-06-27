@@ -15,6 +15,7 @@ The simulation is based on Python 2.7.11.
 * cd to the `venv` directory
 * activate your virtualenv (e.g. `$ source bin/activate`)
 * run: `pip install -r requirements.txt` in your shell
+* deactivate your virtualenv
 * add a `mongodb_uri.txt` file to the directory with a single line:
 
     `mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database][?options]]`
@@ -28,9 +29,10 @@ The simulation is based on Python 2.7.11.
      
 ## Run the ingestion
 
-From the directory where the `threaded_ingestion.py` file is located, run:
+From the directory where the `threaded_ingestion.py` file is located:
 
-`python threaded_ingestion.py -n 10 -e <es-host1>,<es-host2>:<es-port> -s 0`
+* activate your virtualenv (e.g. `$ source bin/activate`)
+* run `(venv) python threaded_ingestion.py -n 10 -e <es-host1>,<es-host2>:<es-port> -s 0`
  
  where `-n` defines the number of "files" ingested, `-e` serves as es connection string (comma separated list of hosts:port), 
  and the `-s` option lets you define a start index for the file names (e.g. 0 -> 000000.pdf as first file).   
