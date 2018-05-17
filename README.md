@@ -2,8 +2,8 @@
 Simulates distributed, parallel ingestion and processing of assets (PDFs) based on queues (reception, creation, processing).
 
 All ingestion and processing "tasks" run in threads processing common queues and create associated MongoDB and 
-Elasticsearch documents. The goal is to simulate the upload of assets to an app cluster, reception of those assets
-by this cluster, parallel processing of those assets on a different, remote app cluster, and final processing on the receiving app cluster.  
+Elasticsearch documents. The goal is to simulate the upload of assets to an app cluster, reception of these assets
+by the same cluster, parallel processing of the assets on a different, remote app cluster, and final processing on the receiving app cluster.  
   
 ## Installation
 The simulation is based on Python 2.7.11. 
